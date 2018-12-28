@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import Layout from '../../components/Layout'
 
 export default () => (
@@ -12,4 +12,4 @@ export default () => (
           </div>
           </section>
   </Layout>
-);
+)

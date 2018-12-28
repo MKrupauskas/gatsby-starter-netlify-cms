@@ -1,8 +1,13 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { ProductPageTemplate } from '../../templates/product-page'
 
-const ProductPagePreview = ({ entry, getAsset }) => {
+interface Props {
+  entry: any
+  getAsset: any
+}
+
+const ProductPagePreview: React.SFC<Props> = ({ entry, getAsset }) => {
   const entryBlurbs = entry.getIn(['data', 'intro', 'blurbs'])
   const blurbs = entryBlurbs ? entryBlurbs.toJS() : []
 
@@ -20,26 +25,26 @@ const ProductPagePreview = ({ entry, getAsset }) => {
       description={entry.getIn(['data', 'description'])}
       intro={{ blurbs }}
       main={{
-        heading: entry.getIn(['data', 'main', 'heading']),
         description: entry.getIn(['data', 'main', 'description']),
+        heading: entry.getIn(['data', 'main', 'heading']),
         image1: {
-          image: getAsset(entry.getIn(['data', 'main', 'image1', 'image'])),
           alt: entry.getIn(['data', 'main', 'image1', 'alt']),
+          image: getAsset(entry.getIn(['data', 'main', 'image1', 'image'])),
         },
         image2: {
-          image: getAsset(entry.getIn(['data', 'main', 'image2', 'image'])),
           alt: entry.getIn(['data', 'main', 'image2', 'alt']),
+          image: getAsset(entry.getIn(['data', 'main', 'image2', 'image'])),
         },
         image3: {
-          image: getAsset(entry.getIn(['data', 'main', 'image3', 'image'])),
           alt: entry.getIn(['data', 'main', 'image3', 'alt']),
+          image: getAsset(entry.getIn(['data', 'main', 'image3', 'image'])),
         },
       }}
       fullImage={entry.getIn(['data', 'full_image'])}
       testimonials={testimonials}
       pricing={{
-        heading: entry.getIn(['data', 'pricing', 'heading']),
         description: entry.getIn(['data', 'pricing', 'description']),
+        heading: entry.getIn(['data', 'pricing', 'heading']),
         plans: pricingPlans,
       }}
     />

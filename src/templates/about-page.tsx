@@ -1,10 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Content, { HTMLContent } from './../components/Content'
+import Layout from './../components/Layout'
 
-export const AboutPageTemplate = ({ title, content, contentComponent }) => {
+interface Props {
+  title: string
+  content: string
+  contentComponent?: any
+}
+
+interface AboutPageProps {
+  data: any
+}
+
+export const AboutPageTemplate: React.SFC<Props> = ({ title, content, contentComponent }) => {
   const PageContent = contentComponent || Content
 
   return (
@@ -26,12 +36,12 @@ export const AboutPageTemplate = ({ title, content, contentComponent }) => {
 }
 
 AboutPageTemplate.propTypes = {
-  title: PropTypes.string.isRequired,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
+  title: PropTypes.string.isRequired,
 }
 
-const AboutPage = ({ data }) => {
+const AboutPage: React.SFC<AboutPageProps> = ({ data }) => {
   const { markdownRemark: post } = data
 
   return (

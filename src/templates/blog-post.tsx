@@ -1,12 +1,25 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { kebabCase } from 'lodash'
-import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
-import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
+import { kebabCase } from 'lodash'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Helmet from 'react-helmet'
+import Content, { HTMLContent } from './../components/Content'
+import Layout from './../components/Layout'
 
-export const BlogPostTemplate = ({
+interface Props {
+  content: string
+  contentComponent?: any
+  description: string
+  tags: string[]
+  title: string
+  helmet?: any
+}
+
+interface BlogPostProps {
+  data: any
+}
+
+export const BlogPostTemplate: React.SFC<Props> = ({
   content,
   contentComponent,
   description,
@@ -50,11 +63,11 @@ BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
   contentComponent: PropTypes.func,
   description: PropTypes.string,
-  title: PropTypes.string,
   helmet: PropTypes.object,
+  title: PropTypes.string,
 }
 
-const BlogPost = ({ data }) => {
+const BlogPost: React.SFC<BlogPostProps> = ({ data }) => {
   const { markdownRemark: post } = data
 
   return (

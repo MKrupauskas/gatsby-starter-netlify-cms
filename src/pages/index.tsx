@@ -1,9 +1,17 @@
-import React from 'react'
+import { graphql, Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import { Link, graphql } from 'gatsby'
+import React from 'react'
 import Layout from '../components/Layout'
 
-export default class IndexPage extends React.Component {
+interface Props {
+  data: {
+    allMarkdownRemark: {
+      edges: any[]
+    }
+  }
+}
+
+export default class IndexPage extends React.Component<Props> {
   render() {
     const { data } = this.props
     const { edges: posts } = data.allMarkdownRemark
@@ -44,14 +52,6 @@ export default class IndexPage extends React.Component {
       </Layout>
     )
   }
-}
-
-IndexPage.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array,
-    }),
-  }),
 }
 
 export const pageQuery = graphql`

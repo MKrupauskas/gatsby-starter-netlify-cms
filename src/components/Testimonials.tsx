@@ -1,8 +1,12 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { v4 } from 'uuid'
 
-const Testimonials = ({ testimonials }) => (
+interface Props {
+  testimonials: any[]
+}
+
+const Testimonials: React.SFC<Props> = ({ testimonials }) => (
   <div>
     {testimonials.map(testimonial => (
       <article key={v4()} className="message">
@@ -19,8 +23,8 @@ const Testimonials = ({ testimonials }) => (
 Testimonials.propTypes = {
   testimonials: PropTypes.arrayOf(
     PropTypes.shape({
-      quote: PropTypes.string,
       author: PropTypes.string,
+      quote: PropTypes.string,
     })
   ),
 }

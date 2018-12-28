@@ -1,17 +1,21 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 
-const FeatureGrid = ({ gridItems }) => (
+interface Props {
+  gridItems: any
+}
+
+const FeatureGrid: React.SFC<Props> = ({ gridItems }) => (
   <div className="columns is-multiline">
-    {gridItems.map(item => (
+    {gridItems.map((item: any) => (
       <div key={item.text} className="column is-6">
         <section className="section">
           <div className="has-text-centered">
             <div
               style={{
-                width: '240px',
                 display: 'inline-block',
+                width: '240px',
               }}
             >
               <PreviewCompatibleImage imageInfo={item} />

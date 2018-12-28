@@ -1,10 +1,24 @@
-import React from 'react'
+import { graphql, Link } from 'gatsby'
 import { kebabCase } from 'lodash'
+import React from 'react'
 import Helmet from 'react-helmet'
-import { Link, graphql } from 'gatsby'
 import Layout from '../../components/Layout'
 
-const TagsPage = ({
+// TODO: maybe site can be common model
+interface Props {
+  data: {
+    allMarkdownRemark: {
+      group: any
+    }
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+  }
+}
+
+const TagsPage: React.SFC<Props> = ({
   data: { allMarkdownRemark: { group }, site: { siteMetadata: { title } } },
 }) => (
   <Layout>
@@ -18,7 +32,7 @@ const TagsPage = ({
           >
             <h1 className="title is-size-2 is-bold-light">Tags</h1>
             <ul className="taglist">
-              {group.map(tag => (
+              {group.map((tag: any) => (
                 <li key={tag.fieldValue}>
                   <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
                     {tag.fieldValue} ({tag.totalCount})

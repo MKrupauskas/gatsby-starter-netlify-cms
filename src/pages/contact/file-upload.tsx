@@ -1,44 +1,39 @@
-import React from "react";
-import { navigate } from "gatsby-link";
+import { navigate } from 'gatsby'
+import React from 'react'
 import Layout from '../../components/Layout'
 
-function encode(data) {
-  const formData = new FormData();
+function encode(data: any) {
+  const formData = new FormData()
 
   for (const key of Object.keys(data)) {
-    formData.append(key, data[key]);
+    formData.append(key, data[key])
   }
 
-  return formData;
+  return formData
 }
 
 export default class Contact extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  handleChange = (e: any) => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  handleAttachment = (e: any) => {
+    this.setState({ [e.target.name]: e.target.files[0] })
+  }
 
-  handleAttachment = e => {
-    this.setState({ [e.target.name]: e.target.files[0] });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const form = e.target;
-    fetch("/", {
-      method: "POST",
+  handleSubmit = (e: any) => {
+    e.preventDefault()
+    const form = e.target
+    fetch('/', {
       body: encode({
-        "form-name": form.getAttribute("name"),
+        'form-name': form.getAttribute('name'),
         ...this.state
-      })
+      }),
+      method: 'POST'
     })
-      .then(() => navigate(form.getAttribute("action")))
-      .catch(error => alert(error));
-  };
+      .then(() => navigate(form.getAttribute('action')))
+      .catch(error => alert(error))
+  }
 
   render() {
     return (
@@ -57,16 +52,16 @@ export default class Contact extends React.Component {
         >
           {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
           <input type="hidden" name="form-name" value="file-upload" />
-          <div hidden>
+          <div hidden={true}>
             <label>
-              Don’t fill this out:{" "}
+              Don’t fill this out:{' '}
               <input name="bot-field" onChange={this.handleChange} />
             </label>
           </div>
           <div className="field">
-            <label className="label" htmlFor={"name"} >Your name</label>
+            <label className="label" htmlFor="name" >Your name</label>
             <div className="control">
-              <input className="input" type={"text"} name={"name"} onChange={this.handleChange} id={"name"} required={true} />
+              <input className="input" type="text" name="name" onChange={this.handleChange} id="name" required={true} />
             </div>
           </div>
           <div className="field">
@@ -94,6 +89,6 @@ export default class Contact extends React.Component {
         </div>
       </section>
       </Layout>
-    );
+    )
   }
 }
