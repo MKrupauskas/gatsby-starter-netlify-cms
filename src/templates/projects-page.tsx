@@ -3,7 +3,13 @@ import React from 'react'
 import Content, { HTMLContent } from './../components/Content'
 import Layout from './../components/Layout'
 
-export const ProjectPageTemplate: React.SFC<{}> = () => {
+interface Props {
+    html: any
+    title: string
+    projects: any[]
+}
+
+export const ProjectPageTemplate: React.SFC<Props> = ({ html, title, projects }) => {
   return (
     <section className="section section--gradient">
       <div className="container">
@@ -11,9 +17,18 @@ export const ProjectPageTemplate: React.SFC<{}> = () => {
           <div className="column is-10 is-offset-1">
             <div className="section">
               <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {'Projects'}
+                {title}
               </h2>
-              <Content className="content" content={'Projects content'} />
+              <HTMLContent className="content" content={html} />
+              <ul>
+                  {projects.map((project: any, index: number) => (
+                    <li key={index}>
+                      <div>{project.title}</div>
+                      <div>{project.description}</div>
+                    </li>
+                  )
+                )}
+              </ul>
             </div>
           </div>
         </div>
@@ -22,23 +37,29 @@ export const ProjectPageTemplate: React.SFC<{}> = () => {
   )
 }
 
-const ProjectPage: React.SFC<{}> = () => {
+const ProjectPage: React.SFC<{ data: any }> = ({ data }) => {
+  const { html, frontmatter } = data.markdownRemark
+
   return (
     <Layout>
-      <ProjectPageTemplate />
+      <ProjectPageTemplate html={html} title={frontmatter.title} projects={frontmatter.projects} />
     </Layout>
   )
 }
 
 export default ProjectPage
 
-// export const aboutPageQuery = graphql`
-//   query AboutPage($id: String!) {
-//     markdownRemark(id: { eq: $id }) {
-//       html
-//       frontmatter {
-//         title
-//       }
-//     }
-//   }
-// `
+export const projectPageQuery = graphql`
+  query ProjectPage($id: String!) {
+    markdownRemark(id: { eq: $id }) {
+      html
+      frontmatter {
+        title
+        projects {
+          title
+          description
+        }
+      }
+    }
+  }
+`
