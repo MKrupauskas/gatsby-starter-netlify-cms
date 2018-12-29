@@ -29,6 +29,14 @@ collections:
           - {label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
+      - file: "src/pages/about/portfolio.md"
+        label: "Portfolio"
+        name: "portfolio"
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "protfolio-page"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+          - {label: Projects, name: projects, widget: list, fields: [{label: Title, name: title, widget: string}, {label: Description, name: description, widget: string}]}
       - file: "src/pages/products/index.md"
         label: "Products Page"
         name: "products"
