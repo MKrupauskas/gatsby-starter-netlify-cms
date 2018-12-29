@@ -7,9 +7,12 @@ interface Props {
     html: any
     title: string
     projects: any[]
+    contentComponent?: any
 }
 
-export const ProjectPageTemplate: React.SFC<Props> = ({ html, title, projects }) => {
+export const ProjectPageTemplate: React.SFC<Props> = ({ html, title, projects, contentComponent }) => {
+  const PageContent = contentComponent || Content
+
   return (
     <section className="section section--gradient">
       <div className="container">
@@ -19,7 +22,7 @@ export const ProjectPageTemplate: React.SFC<Props> = ({ html, title, projects })
               <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
                 {title}
               </h2>
-              <HTMLContent className="content" content={html} />
+              <PageContent className="content" content={html} />
               <ul>
                   {projects.map((project: any, index: number) => (
                     <li key={index}>
@@ -42,7 +45,12 @@ const ProjectPage: React.SFC<{ data: any }> = ({ data }) => {
 
   return (
     <Layout>
-      <ProjectPageTemplate html={html} title={frontmatter.title} projects={frontmatter.projects} />
+      <ProjectPageTemplate
+        html={html}
+        title={frontmatter.title}
+        projects={frontmatter.projects}
+        contentComponent={HTMLContent}
+      />
     </Layout>
   )
 }
