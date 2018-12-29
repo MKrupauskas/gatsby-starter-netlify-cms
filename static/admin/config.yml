@@ -29,9 +29,9 @@ collections:
           - {label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
-      - file: "src/pages/about/portfolio.md"
-        label: "Portfolio"
-        name: "portfolio"
+      - file: "src/pages/projects/projects.md"
+        label: "Projects"
+        name: "projects"
         fields:
           - {label: "Template Key", name: "templateKey", widget: "hidden", default: "protfolio-page"}
           - {label: "Title", name: "title", widget: "string"}
