@@ -1,7 +1,10 @@
 import { graphql } from 'gatsby'
 import React from 'react'
+import { v4 } from 'uuid'
+
 import Content, { HTMLContent } from './../components/Content'
 import Layout from './../components/Layout'
+import Project from './../components/Project'
 
 interface Props {
     html: any
@@ -14,27 +17,13 @@ export const ProjectPageTemplate: React.SFC<Props> = ({ html, title, projects, c
   const PageContent = contentComponent || Content
 
   return (
-    <section className="section section--gradient">
-      <div className="container">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <div className="section">
-              <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {title}
-              </h2>
-              <PageContent className="content" content={html} />
-              <ul>
-                  {projects.map((project: any, index: number) => (
-                    <li key={index}>
-                      <div>{project.title}</div>
-                      <div>{project.description}</div>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-          </div>
-        </div>
+    <section>
+      <h2>
+        {title}
+      </h2>
+      <PageContent className="content" content={html} />
+      <div>
+          {projects.map((project: any) => <Project key={v4()} project={project} />)}
       </div>
     </section>
   )
