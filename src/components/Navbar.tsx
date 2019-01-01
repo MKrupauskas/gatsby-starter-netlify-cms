@@ -45,9 +45,6 @@ class Navbar extends React.Component {
           <StyledLink to="/contact">
             Contact
           </StyledLink>
-          <StyledLink to="/contact/examples">
-            Form Examples
-          </StyledLink>
         </div>
       </Navigation>
     )

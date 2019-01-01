@@ -17,6 +17,23 @@ const Post = styled.div`
   padding: 2rem;
   margin-top: 1rem;
 `
+
+const TitleBlock = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`
+
+const Title = styled(Link)`
+  font-size: 1.25rem;
+  font-weight: bold;
+`
+
+const Date = styled.small`
+  white-space: nowrap;
+`
+
 export default class IndexPage extends React.Component<Props> {
   render() {
     const { edges: posts } = this.props.data.allMarkdownRemark
@@ -28,13 +45,12 @@ export default class IndexPage extends React.Component<Props> {
             {posts
               .map(({ node: post }) => (
                 <Post key={post.id}>
-                  <p>
-                    <Link className="has-text-primary" to={post.fields.slug}>
+                  <TitleBlock>
+                    <Title to={post.fields.slug}>
                       {post.frontmatter.title}
-                    </Link>
-                    <span> &bull; </span>
-                    <small>{post.frontmatter.date}</small>
-                  </p>
+                    </Title>
+                    <Date>{post.frontmatter.date}</Date>
+                  </TitleBlock>
                   <p>
                     {post.excerpt}
                   </p>
