@@ -3,15 +3,27 @@
 import { graphql, StaticQuery } from 'gatsby'
 import React from 'react'
 import Helmet from 'react-helmet'
+import styled from 'styled-components'
 
-import Navbar from '../components/Navbar'
-import './all.sass'
+import Footer from './../components/Footer'
+import Navbar from './../components/Navbar'
 
 interface Props {
   children: React.ReactNode
 }
 
-const TemplateWrapper: React.SFC<Props> = ({ children }) => (
+const Container = styled.main`
+  margin: 3rem auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const Template: React.SFC<Props> = ({ children }) => (
   <StaticQuery
     query={graphql`
       query HeadingQuery {
@@ -43,10 +55,11 @@ const TemplateWrapper: React.SFC<Props> = ({ children }) => (
           <meta property="og:image" content="/img/og-image.jpg" />
         </Helmet>
         <Navbar />
-        <div>{children}</div>
+        <Container>{children}</Container>
+        <Footer />
       </div>
     )}
   />
 )
 
-export default TemplateWrapper
+export default Template

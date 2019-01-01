@@ -1,84 +1,55 @@
 import { Link } from 'gatsby'
 import React from 'react'
-import github from './../img/github-icon.svg'
-import logo from './../img/logo.svg'
+import styled from 'styled-components'
 
-const Navbar = class extends React.Component {
+const Navigation = styled.nav`
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  background: white;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
 
-  componentDidMount() {
-    // Get all "navbar-burger" elements
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
-    // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
+const StyledLink = styled(Link)`
+  margin-left: 1rem;
+`
 
-      // Add a click event on each of them
-      $navbarBurgers.forEach(el => {
-        el.addEventListener('click', () => {
-
-          // Get the target from the "data-target" attribute
-          const target = el.dataset.target
-          const $target = document.getElementById(target)
-
-          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-          el.classList.toggle('is-active')
-
-          if ($target) {
-            $target.classList.toggle('is-active')
-          }
-        })
-      })
-    }
-  }
-
+class Navbar extends React.Component {
   render() {
     return (
-
-      <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
-        <div className="container">
-          <div className="navbar-brand">
-            <Link to="/" className="navbar-item" title="Logo">
-              <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
-            </Link>
-            {/* Hamburger menu */}
-            <div className="navbar-burger burger" data-target="navMenu">
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-          <div id="navMenu" className="navbar-menu">
-            <div className="navbar-start has-text-centered">
-              <Link className="navbar-item" to="/about">
-                About
-              </Link>
-              <Link className="navbar-item" to="/projects">
-                Projects
-              </Link>
-              <Link className="navbar-item" to="/products">
-                Products
-              </Link>
-              <Link className="navbar-item" to="/contact">
-                Contact
-              </Link>
-              <Link className="navbar-item" to="/contact/examples">
-                Form Examples
-              </Link>
-            </div>
-            <div className="navbar-end has-text-centered">
-              <a
-                className="navbar-item"
-                href="https://github.com/mkrupauskas"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="icon">
-                  <img src={github} alt="Github" />
-                </span>
-              </a>
-            </div>
+      <Navigation role="navigation" aria-label="main-navigation">
+        <div>
+          <Link to="/">
+            Home
+          </Link>
+          <div>
+            <span />
+            <span />
+            <span />
           </div>
         </div>
-      </nav>
+        <div>
+          <StyledLink to="/about">
+            About
+          </StyledLink>
+          <StyledLink to="/projects">
+            Projects
+          </StyledLink>
+          <StyledLink to="/products">
+            Products
+          </StyledLink>
+          <StyledLink to="/contact">
+            Contact
+          </StyledLink>
+          <StyledLink to="/contact/examples">
+            Form Examples
+          </StyledLink>
+        </div>
+      </Navigation>
     )
   }
 }

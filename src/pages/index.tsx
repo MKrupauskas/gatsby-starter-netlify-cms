@@ -1,7 +1,8 @@
 import { graphql, Link } from 'gatsby'
-import PropTypes from 'prop-types'
 import React from 'react'
-import Layout from '../components/Layout'
+import styled from 'styled-components'
+
+import Layout from './../components/Layout'
 
 interface Props {
   data: {
@@ -11,25 +12,22 @@ interface Props {
   }
 }
 
+const Post = styled.div`
+  border: 1px solid #333;
+  padding: 2rem;
+  margin-top: 1rem;
+`
 export default class IndexPage extends React.Component<Props> {
   render() {
-    const { data } = this.props
-    const { edges: posts } = data.allMarkdownRemark
+    const { edges: posts } = this.props.data.allMarkdownRemark
 
     return (
       <Layout>
-        <section className="section">
-          <div className="container">
-            <div className="content">
-              <h1 className="has-text-weight-bold is-size-2">Latest Stories</h1>
-            </div>
+        <section>
+            <h1>Latest Stories</h1>
             {posts
               .map(({ node: post }) => (
-                <div
-                  className="content"
-                  style={{ border: '1px solid #333', padding: '2em 4em' }}
-                  key={post.id}
-                >
+                <Post key={post.id}>
                   <p>
                     <Link className="has-text-primary" to={post.fields.slug}>
                       {post.frontmatter.title}
@@ -39,15 +37,12 @@ export default class IndexPage extends React.Component<Props> {
                   </p>
                   <p>
                     {post.excerpt}
-                    <br />
-                    <br />
-                    <Link className="button is-small" to={post.fields.slug}>
-                      Keep Reading →
-                    </Link>
                   </p>
-                </div>
+                  <Link className="button is-small" to={post.fields.slug}>
+                    Keep Reading →
+                  </Link>
+                </Post>
               ))}
-          </div>
         </section>
       </Layout>
     )
