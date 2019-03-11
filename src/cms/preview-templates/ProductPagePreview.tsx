@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import { ProductPageTemplate } from '../../templates/product-page'
 
 interface Props {
-  entry: any
-  getAsset: any
+  entry: {
+    getIn: (arg: any) => any
+  }
+  getAsset: (id: string) => any
 }
 
-const ProductPagePreview: React.SFC<Props> = ({ entry, getAsset }) => {
+const ProductPagePreview: React.SFC<Props> = ({ entry, getAsset }: Props) => {
   const entryBlurbs = entry.getIn(['data', 'intro', 'blurbs'])
   const blurbs = entryBlurbs ? entryBlurbs.toJS() : []
 
@@ -49,13 +50,6 @@ const ProductPagePreview: React.SFC<Props> = ({ entry, getAsset }) => {
       }}
     />
   )
-}
-
-ProductPagePreview.propTypes = {
-  entry: PropTypes.shape({
-    getIn: PropTypes.func,
-  }),
-  getAsset: PropTypes.func,
 }
 
 export default ProductPagePreview

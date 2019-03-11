@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Features from './../components/Features'
 import Layout from './../components/Layout'
@@ -12,15 +11,31 @@ interface Props {
   title: string
   heading: string
   description: string
-  intro: any
-  main: any
+  intro: {
+    blurbs: any
+  }
+  main: {
+    description: string
+    heading: string
+    image1: any
+    image2: any
+    image3: any
+  }
   testimonials: any
   fullImage: any
-  pricing: any
+  pricing: {
+    description: string
+    heading: string
+    plans: any
+  }
 }
 
 interface ProductPageProps {
-  data: any
+  data: {
+    markdownRemark: {
+      frontmatter: any
+    }
+  }
 }
 
 export const ProductPageTemplate: React.SFC<Props> = ({
@@ -33,14 +48,12 @@ export const ProductPageTemplate: React.SFC<Props> = ({
   testimonials,
   fullImage,
   pricing,
-}) => (
+}: Props) => (
   <section>
     <div
       style={{
         backgroundImage: `url(${
-          !!image.childImageSharp
-            ? image.childImageSharp.fluid.src
-            : image
+          !!image.childImageSharp ? image.childImageSharp.fluid.src : image
         })`,
       }}
     >
@@ -55,17 +68,13 @@ export const ProductPageTemplate: React.SFC<Props> = ({
     </div>
     <div>
       <div>
-        <h3>
-          {heading}
-        </h3>
+        <h3>{heading}</h3>
         <p>{description}</p>
       </div>
     </div>
     <Features gridItems={intro.blurbs} />
     <div>
-      <h3>
-        {main.heading}
-      </h3>
+      <h3>{main.heading}</h3>
       <p>{main.description}</p>
     </div>
     <div>
@@ -89,37 +98,11 @@ export const ProductPageTemplate: React.SFC<Props> = ({
         })`,
       }}
     />
-    <h2>
-      {pricing.heading}
-    </h2>
+    <h2>{pricing.heading}</h2>
     <p>{pricing.description}</p>
     <Pricing data={pricing.plans} />
   </section>
 )
-
-ProductPageTemplate.propTypes = {
-  description: PropTypes.string,
-  fullImage: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  heading: PropTypes.string,
-  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  intro: PropTypes.shape({
-    blurbs: PropTypes.array,
-  }),
-  main: PropTypes.shape({
-    description: PropTypes.string,
-    heading: PropTypes.string,
-    image1: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  }),
-  pricing: PropTypes.shape({
-    description: PropTypes.string,
-    heading: PropTypes.string,
-    plans: PropTypes.array,
-  }),
-  testimonials: PropTypes.array,
-  title: PropTypes.string,
-}
 
 const ProductPage: React.SFC<ProductPageProps> = ({ data }) => {
   const { frontmatter } = data.markdownRemark
@@ -139,14 +122,6 @@ const ProductPage: React.SFC<ProductPageProps> = ({ data }) => {
       />
     </Layout>
   )
-}
-
-ProductPage.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.object,
-    }),
-  }),
 }
 
 export default ProductPage

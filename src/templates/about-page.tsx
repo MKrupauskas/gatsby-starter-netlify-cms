@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Content, { HTMLContent } from './../components/Content'
 import Layout from './../components/Layout'
@@ -14,23 +13,19 @@ interface AboutPageProps {
   data: any
 }
 
-export const AboutPageTemplate: React.SFC<Props> = ({ title, content, contentComponent }) => {
+export const AboutPageTemplate: React.SFC<Props> = ({
+  title,
+  content,
+  contentComponent,
+}: Props) => {
   const PageContent = contentComponent || Content
 
   return (
     <section>
-      <h2>
-        {title}
-      </h2>
+      <h2>{title}</h2>
       <PageContent className="content" content={content} />
     </section>
   )
-}
-
-AboutPageTemplate.propTypes = {
-  content: PropTypes.string,
-  contentComponent: PropTypes.func,
-  title: PropTypes.string.isRequired,
 }
 
 const AboutPage: React.SFC<AboutPageProps> = ({ data }) => {
@@ -45,10 +40,6 @@ const AboutPage: React.SFC<AboutPageProps> = ({ data }) => {
       />
     </Layout>
   )
-}
-
-AboutPage.propTypes = {
-  data: PropTypes.object.isRequired,
 }
 
 export default AboutPage

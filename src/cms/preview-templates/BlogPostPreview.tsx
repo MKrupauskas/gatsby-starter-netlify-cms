@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import { BlogPostTemplate } from '../../templates/blog-post'
 
 interface Props {
-  entry: any
-  widgetFor: any
+  entry: {
+    getIn: (arg: any) => any
+  }
+  widgetFor: (id: string) => string
 }
 
-const BlogPostPreview: React.SFC<Props> = ({ entry, widgetFor }) => (
+const BlogPostPreview: React.SFC<Props> = ({ entry, widgetFor }: Props) => (
   <BlogPostTemplate
     content={widgetFor('body')}
     description={entry.getIn(['data', 'description'])}
@@ -15,12 +16,5 @@ const BlogPostPreview: React.SFC<Props> = ({ entry, widgetFor }) => (
     title={entry.getIn(['data', 'title'])}
   />
 )
-
-BlogPostPreview.propTypes = {
-  entry: PropTypes.shape({
-    getIn: PropTypes.func,
-  }),
-  widgetFor: PropTypes.func,
-}
 
 export default BlogPostPreview

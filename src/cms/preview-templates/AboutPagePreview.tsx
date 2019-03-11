@@ -1,24 +1,18 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import { AboutPageTemplate } from '../../templates/about-page'
 
 interface Props {
-  entry: any
-  widgetFor: any
+  entry: {
+    getIn: (arg: any) => any
+  }
+  widgetFor: (id: string) => string
 }
 
-const AboutPagePreview: React.SFC<Props> = ({ entry, widgetFor }) => (
+const AboutPagePreview: React.SFC<Props> = ({ entry, widgetFor }: Props) => (
   <AboutPageTemplate
     title={entry.getIn(['data', 'title'])}
     content={widgetFor('body')}
   />
 )
-
-AboutPagePreview.propTypes = {
-  entry: PropTypes.shape({
-    getIn: PropTypes.func,
-  }),
-  widgetFor: PropTypes.func,
-}
 
 export default AboutPagePreview

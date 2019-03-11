@@ -1,8 +1,14 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
+interface PriceItem {
+  description: any
+  items: any
+  plan: any
+  price: any
+}
+
 interface Props {
-  data: any
+  data: PriceItem[]
 }
 
 const Pricing: React.SFC<Props> = ({ data }) => (
@@ -29,16 +35,5 @@ const Pricing: React.SFC<Props> = ({ data }) => (
     ))}
   </div>
 )
-
-Pricing.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      description: PropTypes.string,
-      items: PropTypes.array,
-      plan: PropTypes.string,
-      price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    })
-  ),
-}
 
 export default Pricing
