@@ -1,4 +1,3 @@
-import { graphql, StaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -8,7 +7,7 @@ const FooterBlock = styled.footer`
   text-align: center;
 `
 
-const Footer: React.SFC<{}> = () => (
+const Footer: React.SFC = () => (
   <FooterBlock>
     <strong>© 2019 mkrup.</strong> Made with love by Mykolas Krupauskas.
   </FooterBlock>

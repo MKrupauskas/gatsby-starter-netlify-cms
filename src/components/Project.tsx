@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
-    project: any
+  project: any
 }
 
 const ProjectBlock = styled.div`
@@ -13,8 +13,8 @@ const ProjectBlock = styled.div`
 
 const Project: React.SFC<Props> = ({ project }) => (
   <ProjectBlock>
-      <h3>{project.title}</h3>
-      <div>{project.description}</div>
+    <h3>{project.title}</h3>
+    <div>{project.description}</div>
   </ProjectBlock>
 )
 

@@ -1,12 +1,16 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 
-interface Props {
-  gridItems: any
+interface GridItem {
+  text: string
+  image: any
 }
 
-const FeatureGrid: React.SFC<Props> = ({ gridItems }) => (
+interface Props {
+  gridItems: GridItem[]
+}
+
+const FeatureGrid: React.SFC<Props> = ({ gridItems }: Props) => (
   <div className="columns is-multiline">
     {gridItems.map((item: any) => (
       <div key={item.text} className="column is-6">
@@ -27,14 +31,5 @@ const FeatureGrid: React.SFC<Props> = ({ gridItems }) => (
     ))}
   </div>
 )
-
-FeatureGrid.propTypes = {
-  gridItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-      text: PropTypes.string,
-    })
-  ),
-}
 
 export default FeatureGrid

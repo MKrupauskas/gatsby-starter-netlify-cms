@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
 interface HTMLContentProps {
@@ -6,24 +5,20 @@ interface HTMLContentProps {
   className?: string
 }
 
-export const HTMLContent: React.SFC<HTMLContentProps> = ({ content, className }) => (
+export const HTMLContent: React.SFC<HTMLContentProps> = ({
+  content,
+  className,
+}: HTMLContentProps) => (
   <div className={className} dangerouslySetInnerHTML={{ __html: content }} />
 )
 
-interface ContentProps {
-  content: string
+interface Props {
+  content: React.ReactNode
   className?: string
 }
 
-const Content: React.SFC<ContentProps> = ({ content, className }) => (
+const Content: React.SFC<Props> = ({ content, className }: Props) => (
   <div className={className}>{content}</div>
 )
-
-Content.propTypes = {
-  className: PropTypes.string,
-  content: PropTypes.node,
-}
-
-HTMLContent.propTypes = Content.propTypes
 
 export default Content

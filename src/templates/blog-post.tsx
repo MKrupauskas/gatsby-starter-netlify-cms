@@ -1,6 +1,5 @@
 import { graphql, Link } from 'gatsby'
 import { kebabCase } from 'lodash'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import Content, { HTMLContent } from './../components/Content'
@@ -26,15 +25,13 @@ export const BlogPostTemplate: React.SFC<Props> = ({
   tags,
   title,
   helmet,
-}) => {
+}: Props) => {
   const PostContent = contentComponent || Content
 
   return (
     <section>
       {helmet}
-      <h1>
-        {title}
-      </h1>
+      <h1>{title}</h1>
       <p>{description}</p>
       <PostContent content={content} />
       {tags && tags.length && (
@@ -53,15 +50,7 @@ export const BlogPostTemplate: React.SFC<Props> = ({
   )
 }
 
-BlogPostTemplate.propTypes = {
-  content: PropTypes.node.isRequired,
-  contentComponent: PropTypes.func,
-  description: PropTypes.string,
-  helmet: PropTypes.object,
-  title: PropTypes.string,
-}
-
-const BlogPost: React.SFC<BlogPostProps> = ({ data }) => {
+const BlogPost: React.SFC<BlogPostProps> = ({ data }: BlogPostProps) => {
   const { markdownRemark: post } = data
 
   return (
@@ -71,11 +60,12 @@ const BlogPost: React.SFC<BlogPostProps> = ({ data }) => {
         contentComponent={HTMLContent}
         description={post.frontmatter.description}
         helmet={
-          <Helmet
-            titleTemplate="%s | Blog"
-          >
+          <Helmet titleTemplate="%s | Blog">
             <title>{`${post.frontmatter.title}`}</title>
-            <meta name="description" content={`${post.frontmatter.description}`} />
+            <meta
+              name="description"
+              content={`${post.frontmatter.description}`}
+            />
           </Helmet>
         }
         tags={post.frontmatter.tags}
@@ -83,12 +73,6 @@ const BlogPost: React.SFC<BlogPostProps> = ({ data }) => {
       />
     </Layout>
   )
-}
-
-BlogPost.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.object,
-  }),
 }
 
 export default BlogPost
